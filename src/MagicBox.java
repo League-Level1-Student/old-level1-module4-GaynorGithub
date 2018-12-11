@@ -19,6 +19,7 @@ import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
 	
+	MediaPalace med = new MediaPalace();
 	
 	
 	/*
@@ -53,6 +54,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	private void createUI() {
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+		frame.addMouseListener(this);
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
@@ -77,6 +79,18 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("X Coordinate: " + e.getX());
+		System.out.println("Y Coordinate: " + e.getY());
+		
+		if(46 < e.getX() && e.getX() < 101 && e.getY() > 64 && e.getY() < 124) {
+			med.speak("Lu lu lu lu luuuuuu, lu lu lu lu loooo");
+		}
+		if(306 < e.getX() && e.getX() < 364 && e.getY() > 546 && e.getY() < 588) {
+			med.speak("Mmm, I see because, yes, it all makes sense now");
+		}
+		if(514 < e.getX() && e.getX() < 575 && e.getY() > 356 && e.getY() < 418) {
+			med.speak("And it all makes sense now, yes it all makes sense now");
+		}
 		
 	}
 
