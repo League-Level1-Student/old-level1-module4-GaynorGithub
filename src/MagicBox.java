@@ -6,11 +6,13 @@
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -20,6 +22,7 @@ import javax.swing.SwingUtilities;
 public class MagicBox extends JPanel implements Runnable, MouseListener {
 	
 	MediaPalace med = new MediaPalace();
+	JFrame image;
 	
 	
 	/*
@@ -54,6 +57,9 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	private void createUI() {
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+		image = new JFrame();
+		image.setVisible(true);
+		image.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addMouseListener(this);
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
@@ -83,13 +89,15 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		System.out.println("Y Coordinate: " + e.getY());
 		
 		if(46 < e.getX() && e.getX() < 101 && e.getY() > 64 && e.getY() < 124) {
-			med.speak("Lu lu lu lu luuuuuu, lu lu lu lu loooo");
+			image.add(med.loadImageFromWithinProject("FrozenBubble.jpg"));
+			image.pack();
 		}
+		
 		if(306 < e.getX() && e.getX() < 364 && e.getY() > 546 && e.getY() < 588) {
 			med.speak("Mmm, I see because, yes, it all makes sense now");
 		}
 		if(514 < e.getX() && e.getX() < 575 && e.getY() > 356 && e.getY() < 418) {
-			med.speak("And it all makes sense now, yes it all makes sense now");
+			med.playMusicOnComputer("src/FreshPrince.mp3");
 		}
 		
 	}
