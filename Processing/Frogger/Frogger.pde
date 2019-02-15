@@ -20,12 +20,31 @@ class Car {
     this.carSpeed = carSpeed;
     
   }
-  void move(int carSpeed) {
+  void moveRight(int carSpeed) {
     this.carX = this.carX + carSpeed;
     if(this.carX > 400) {
       this.carX = 0;
     }
   }
+  
+  void moveLeft(int carSpeed) {
+    this.carX = this.carX - carSpeed;
+    if(this.carX < 0) {
+      this.carX = 400;
+    }
+  }
+  
+  int getX() {
+    return carX;
+  }
+  int getY() {
+    return carY;
+  }
+  int getSize() {
+    return carSize;
+  }
+  
+  
   
   void display() {
      fill(0,255,0);
@@ -42,22 +61,57 @@ void setup() {
   car4 = new Car(0,240,80,10);
   car5 = new Car(0,310,80,10);
 }
+
+boolean intersects(Car car) {
+      if ((frogY > car.getY() && frogY < car.getY()+50) && (frogX > car.getX() && frogX < car.getX()+car.getSize()))
+      {
+             return true;
+      }
+      else 
+      {
+             return false;
+      }
+  }
+
 void draw() {
-  background(12, 200, 40);
+  background(255, 255, 255);
   fill(50, 255, 50);
   ellipse(frogX, frogY, 20, 15);
   
   
+  
   car1.display();
-  car1.move(1);
+  car1.moveLeft(5);
+  if(intersects(car1) == true) {
+    frogY = 380;
+  }
   car2.display();
-  car2.move(2);
+  car2.moveRight(4);
+  if(intersects(car2) == true) {
+    frogY = 380;
+  }
   car3.display();
-  car3.move(3);
+  car3.moveRight(5);
+  if(intersects(car3) == true) {
+    frogY = 380;
+  }
   car4.display();
-  car4.move(2);
+  car4.moveLeft(5);
+  if(intersects(car4) == true) {
+    frogY = 380;
+  }
   car5.display();
-  car5.move(3);
+  car5.moveLeft(6);
+  if(intersects(car5) == true) {
+    frogY = 380;
+  }
+  
+  if(frogY < 40) {
+    fill(0,0,0);
+    textSize(50);
+    text("You Win!!!", 45, 200);
+    stop();
+  }
   
   if(frogX > 400){
     frogX = frogX - 10;
